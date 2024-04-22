@@ -6,6 +6,8 @@ public class LightSwitch : MonoBehaviour
 {
     private bool PlayerInZone;
     public GameObject ceiling_light;
+    public GameObject LightSwitches01;
+    public bool OnOff = false;
 
     private void Awake()
     {
@@ -17,7 +19,17 @@ public class LightSwitch : MonoBehaviour
     {
         if(PlayerInZone && Input.GetKeyDown(KeyCode.F)) {
             ceiling_light.SetActive(!ceiling_light.activeSelf);
-            //Debug.Log(ceiling_light.gameObject.name);
+            if(!OnOff) {
+                LightSwitches01.transform.Rotate(10, 0, 0);
+                OnOff = true;
+            }
+            else
+            {
+                LightSwitches01.transform.Rotate(-10, 0, 0);
+                OnOff = false;
+            }
+            gameObject.GetComponent<AudioSource>().Play();
+            Debug.Log(ceiling_light.gameObject.name);
         }
     }
 
