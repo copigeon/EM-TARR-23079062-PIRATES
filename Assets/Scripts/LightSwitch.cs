@@ -4,40 +4,42 @@ using UnityEngine;
 
 public class LightSwitch : MonoBehaviour
 {
-    public GameObject TextToDisplay; // text on screen
     private bool PlayerInZone;
-
     public GameObject ceiling_light;
 
-    private void Start()
+    private void Awake()
     {
-        PlayerInZone = false;
-        TextToDisplay.SetActive(false);
+        ///Debug.Log("awake");
     }
+
 
     private void Update()
     {
         if(PlayerInZone && Input.GetKeyDown(KeyCode.F)) {
             ceiling_light.SetActive(!ceiling_light.activeSelf);
+            //Debug.Log(ceiling_light.gameObject.name);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "PlayerCapsule")
+        if (other.gameObject.tag == "Player")
         {
-            TextToDisplay.SetActive(true);
             PlayerInZone = true;
+            //Debug.Log("entering");
         }
+        //Debug.Log("entering");
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "PlayerCapsule")
+        if (other.gameObject.tag == "Player")
         {
             PlayerInZone = false;
-            TextToDisplay.SetActive(false);
+            //Debug.Log("leaving");
         }
+        //Debug.Log("leaving");
+
     }
 
 }
