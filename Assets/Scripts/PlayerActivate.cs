@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerActivate : MonoBehaviour
 {
     private bool PlayerInZone;
     public bool OnOff = false;
     private Animator anim;
-
-
+    public GameObject soda_bottle_dispensed;
+    public AudioSource gas1;
+    public AudioSource gas2;
+    public AudioSource gas3;
+    public AudioSource onpress;
+    public AudioSource trigger;
 
     private void Awake()
     {
@@ -32,16 +37,38 @@ public class PlayerActivate : MonoBehaviour
         }
     }
 
+    private void OnPress()
+    {
+        onpress.Play();
+    }
+
+    private void Gas1()
+    {
+       gas1.Play();
+    }
+
+    private void Gas2()
+    {
+        gas2.Play();
+    }
+
+    private void Gas3()
+    {
+        gas3.Play();
+    }
+
     private void OnEnd()
     {
-        anim.Play("Dispense Bottle", 0, 787f);
-        anim.speed = 0f;
-        Vector3 oldpos = gameObject.transform.Find("Bottle").position;
-        Quaternion oldrot = gameObject.transform.Find("Bottle").rotation;
-        gameObject.transform.Find("Bottle").SetParent(null,true);
-        UnityEngine.GameObject.Find("Bottle").transform.SetLocalPositionAndRotation(oldpos, oldrot);
+        //anim.Play("Dispense Bottle", 0, 787f);
+        //anim.speed = 0f;
+        //Vector3 oldpos = gameObject.transform.Find("Bottle").position;
+        //Quaternion oldrot = gameObject.transform.Find("Bottle").rotation;
+        //gameObject.transform.Find("Bottle").SetParent(null,true);
+        //UnityEngine.GameObject.Find("Bottle").transform.SetLocalPositionAndRotation(oldpos, oldrot);
         //UnityEngine.GameObject.Find("Bottle").transform.rotation = oldrot;
-        //UnityEngine.GameObject.Find("Bottle").transform.position = oldpos;
+        //UnityEngine.GameObject.Find("Bottle").transform.position = new Vector3(20,20);
+        Debug.Log(UnityEngine.GameObject.Find("Bottle").transform.position);
+        Instantiate(soda_bottle_dispensed);
 
 
         //GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
@@ -56,6 +83,10 @@ public class PlayerActivate : MonoBehaviour
         {
             PlayerInZone = true;
             //Debug.Log("entering");
+            if (OnOff == false)
+            {
+                trigger.Play();
+            }
         }
         //Debug.Log("entering");
     }
