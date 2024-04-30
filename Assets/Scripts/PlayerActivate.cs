@@ -85,7 +85,10 @@ public class PlayerActivate : MonoBehaviour
             //Debug.Log("entering");
             if (OnOff == false)
             {
-                trigger.Play();
+                if (!trigger.isPlaying)
+                {
+                    trigger.Play();
+                }
             }
         }
         //Debug.Log("entering");

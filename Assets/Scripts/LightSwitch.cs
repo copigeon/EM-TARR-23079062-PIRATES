@@ -11,12 +11,6 @@ public class LightSwitch : MonoBehaviour
     public AudioSource lights_on;
     public bool OnOff = false;
 
-    private void Awake()
-    {
-        ///Debug.Log("awake");
-    }
-
-
     private void Update()
     {
         if(PlayerInZone && Input.GetKeyDown(KeyCode.F)) {
@@ -43,7 +37,10 @@ public class LightSwitch : MonoBehaviour
             //Debug.Log("entering");
             if (!OnOff)
             {
-                lights_on.Play();
+                if (!lights_on.isPlaying)
+                {
+                    lights_on.Play();
+                }
             }
         }
         //Debug.Log("entering");
